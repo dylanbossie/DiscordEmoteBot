@@ -1,0 +1,8 @@
+{
+"name": "auto-emote-bot",
+"version": "1.0.0",
+"description": "Automatically applies selected emotes to messages sent in selected channels",
+"main": "bot.js",
+"author": "Dylan Bossie",
+"dependencies": {}
+}
