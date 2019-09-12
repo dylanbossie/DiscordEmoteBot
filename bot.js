@@ -1,39 +1,27 @@
-var Discord = require('discord.io');
-var logger = require('winston');
+// require the discord.js module
+const Discord = require('discord.js');
+// require auth.json - config file containing authentication token for bot
 var auth = require('./auth.json');
-// Configure logger settings
-logger.remove(logger.transports.Console);
-logger.add(new logger.transports.Console, {
-    colorize: true
+// create a new Discord client
+const client = new Discord.Client();
+
+// when the client is ready, run this code
+// this event will only trigger one time after logging in
+client.once('ready', () => {
+    console.log('Ready!');
+    console.log('Bot metadata:')
+    console.log(client.user)
 });
-logger.level = 'debug';
-// Initialize Discord Bot
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
-});
-bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
-});
-bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
-       
-        args = args.splice(1);
-        switch(cmd) {
-            // !ping
-            case 'ping':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
-                });
-            break;
-            // Just add any case commands if you want to..
-         }
-     }
+
+// login to Discord with your app's token
+client.login(auth.token);
+
+// listen for a message
+client.on('message', message => {
+    console.log('New message! Message metadata:')
+    console.log(message.author.id)
+    console.log(message.content)
+
+    console.log('Reacting to message.')
+    message.react('🤔')
 });
