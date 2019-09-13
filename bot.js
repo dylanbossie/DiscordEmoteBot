@@ -26,7 +26,9 @@ emoji = '🤔'
 // listen for a message
 client.on('message', message => {
     if (serverParams.validChannels.includes(message.channel.name)) {
+        console.log('New message!')
         msg = message.content
+        console.log(msg)
         // TODO: implement check for a user command (prefix: !)
         // add switch case with all desired commands, which then
         // references command-bot to corresponding function
