@@ -30,7 +30,7 @@ client.on('message', message => {
         // TODO: implement check for a user command (prefix: !)
         // add switch case with all desired commands, which then
         // references command-bot to corresponding function
-        if (msg[0] == '!') {
+        if (msg[0] == '!' && message.author.id == serverParams.superuserID) {
             args = msg.substring(1).split(' ')
             cmd = args[0]
             name = args[1]
